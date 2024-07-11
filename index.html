@@ -1,0 +1,101 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Domestication</title>
+    <link rel="stylesheet" type="text/css" href="./style.css"></link>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.1/socket.io.js"></script>
+    <script type="text/javascript" src="./assetmanager.js"></script>
+    <script type="text/javascript" src="./histogram.js"></script>
+    <script type="text/javascript" src="./graph.js"></script>
+    <script type="text/javascript" src="./gameengine.js"></script>
+    <script type="text/javascript" src="./util.js"></script>
+    <script type="text/javascript" src="./gene.js"></script>
+    <script type="text/javascript" src="./seed.js"></script>
+    <script type="text/javascript" src="./goat.js"></script>
+    <script type="text/javascript" src="./carcass.js"></script>
+    <script type="text/javascript" src="./human.js"></script>
+    <script type="text/javascript" src="./cell.js"></script>
+    <script type="text/javascript" src="./automata.js"></script>
+    <script type="text/javascript" src="./qlearner.js"></script>
+    <script type="text/javascript" src="./datamanager.js"></script>
+    <script type="text/javascript" src="./main.js"></script>
+</head>
+<body>
+    <canvas id="gameWorld" width="1600" height="800"></canvas>
+  <!--  <div id="environment">
+        <p>Enironment</p>
+        <input type="text" id="cell_size" value="16" />Cell Width (Pixels)<br />
+        <input type="text" id="dimension" value="50" />Dimension (NxN)<br />
+        <input type="text" id="river_width" value="4" />River Radius<br />
+        <input type="text" id="bank_size" value="12" />Bank Size<br />
+    </div> -->
+    <!-- <div id="seeds">
+        <p>Seeds</p>
+        <input type="checkbox" id="random_seeds" checked/>Seeds Randomly Initialized<br />
+        <input type="text" id="germ_threshold" value="100" />Germinate Threshold<br />
+        <input type="text" id="full_growth" value="100" />Fully Grown<br />
+        <input type="text" id="seed_death_chance" value="0.01" />Chance of Seed Death<br />
+        <input type="text" id="growth_penalty" value="100" />Max Penalty for Seed Growth<br />
+    </div> -->
+    <br>
+    <div id="db" class="db-status">Database</div><br />
+    <div id="agent">
+        <div id="run">wild type 1 - no humans</div><br />
+        <input type="text" id="human_add_rate" value="100" />Human Add Rate<br />
+     <!--   <input type="checkbox" id="seeds_metabolism" />Seeds Impact Metabolism<br />
+        <input type="text" id="metabolic_threshold" value="30" />Metabolic Threshold<br />
+        <input type="text" id="metabolic_unit" value="5" />Metabolic Unit<br />
+        <input type="text" id="skin_size" value="30" />Water Skin Size<br />
+        <input type="text" id="scoop_size" value="5" />Scoop Size<br />
+        <input type="text" id="basket_size" value="400" />Seed Basket Size<br /> -->
+        <input type="checkbox" id="individualSeedSeparation" checked/>Individuals Select Planting Seeds<br />
+        <input type="checkbox" id="sharedPlantingSeeds" checked/>Share Planting Seeds<br />
+        <input type="text" id="plantSelectionChance" value="1.0" />% chance to selectively plant<br />
+        <input type="text" id="plantSelectionStrength" value="0.2" />% of seeds to plant<br />
+        <label for="seed_selection">Harvesting strategy:</label>
+        <select id="seed_selection">
+            <option value="none">No Harvest</option>
+            <option value="random">Harvest Randomly</option>
+            <option value="weight">Max Seed Weight</option>
+            <option value="deepRoots">Max Root Depth</option>
+            <option value="fecundity">Max Number of Seeds</option>
+            <option value="fruitEnergy">Max Nutritional Value</option>
+            <option value="dispersal">Max Dispersal</option>
+            <option value="minweight">Min Seed Weight</option>
+            <option value="mindeepRoots">Min Root Depth</option>
+            <option value="minfecundity">Min Number of Seeds</option>
+            <option value="minfruitEnergy">Min Nutritional Value</option>
+            <option value="mindispersal">Min Dispersal</option>
+        </select><br />
+        <label for="plant_selection">Planting strategy:</label>
+        <select id="plant_selection">
+            <option value="none">No Planting</option>
+            <option value="random">Random Seeds</option>
+            <option value="bottom">First Harvested</option>
+            <option value="top">Last Harvested</option>
+            <option value="weight">Max Seed Weight</option>
+            <option value="deepRoots">Max Root Depth</option>
+            <option value="fecundity">Max Number of Seeds</option>
+            <option value="fruitEnergy">Max Nutritional Value</option>
+            <option value="dispersal">Max Dispersal</option>
+            <option value="minweight">Min Seed Weight</option>
+            <option value="mindeepRoots">Min Root Depth</option>
+            <option value="minfecundity">Min Number of Seeds</option>
+            <option value="minfruitEnergy">Min Nutritional Value</option>
+            <option value="mindispersal">Min Dispersal</option>
+        </select><br />
+    </div>
+	<br>
+    <input type="radio" id="seeds" name="settings" value="seeds" checked>
+    <label for="seeds">Seeds</label><br>
+    <input type="radio" id="goats" name="settings" value="goats">
+    <label for="goats">Goats</label><br>
+    <button type="button" onclick=reset()>Reset</button><br />
+    <input type="checkbox" id="graphs" checked/>Draw Graphs<br />
+    <input type="checkbox" id="visuals" checked/>Draw Simulation<br />
+    <br />
+    
+</body>
+</html>
